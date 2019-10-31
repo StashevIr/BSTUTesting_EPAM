@@ -13,21 +13,21 @@ namespace AircompanyTests.Tests
         [Test]
         public void HasMilitaryTransportPlane()
         {
-            Airport airport = new Airport(Runner.planes);
+            Airport airport = new Airport(Runner.passengerPlanes);
             Assert.IsTrue(airport.GetTransportMilitaryPlanes().ToList().All(plane => plane.TypeOfPlane == MilitaryType.TRANSPORT));
         }
 
         [Test]
         public void IsExpectedPlaneWithMaxPassengersCapacity()
         {
-            Airport airport = new Airport(Runner.planes);
+            Airport airport = new Airport(Runner.passengerPlanes);
             Assert.IsTrue(airport.GetPassengerPlaneWithMaxPassengersCapacity().PassengersCapacity == airport.Planes.Max().MaxLoadCapacity);
         }
         
         [Test]
         public void NextPlaneMaxLoadCapacityIsHigherThanCurrent()
         {
-            Airport airport = new Airport(Runner.planes).SortByMaxLoadCapacity();
+            Airport airport = new Airport(Runner.passengerPlanes).SortByMaxLoadCapacity();
             Assert.IsTrue(airport.Planes.ToList().
                                          Select(plane => plane.MaxLoadCapacity).
                                          SequenceEqual(airport.Planes.

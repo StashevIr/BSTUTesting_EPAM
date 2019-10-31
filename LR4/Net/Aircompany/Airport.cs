@@ -17,7 +17,7 @@ namespace Aircompany
 
         public PassengerPlane GetPassengerPlaneWithMaxPassengersCapacity()
         {
-            return Runner.planes.Aggregate((w, x) => w.PassengersCapacity > x.PassengersCapacity ? w : x);
+            return Runner.passengerPlanes.Aggregate((w, x) => w.PassengersCapacity > x.PassengersCapacity ? w : x);
         }
 
         public List<MilitaryPlane> GetTransportMilitaryPlanes()
