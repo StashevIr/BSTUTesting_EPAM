@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\AirportTest.cs" />
+    <Compile Include="Tests\AirportTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
