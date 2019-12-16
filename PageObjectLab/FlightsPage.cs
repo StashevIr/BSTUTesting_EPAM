@@ -5,33 +5,39 @@ namespace PageObjectLab
 {
     public class FlightsPage
     {
-        [FindsBy(How = How.XPath, Using = "//*[@type='text'][@tabindex='0'][@placeholder='Departure airport'][@role='textbox']")]
+        [FindsBy(How = How.XPath, Using = "//input[@placeholder='Departure airport']")]
         private IWebElement departureAirport;
-        [FindsBy(How = How.XPath, Using = "//*[@type='text'][@tabindex='0'][@placeholder='Destination airport'][@role='textbox']")]
+        [FindsBy(How = How.XPath, Using = "//input[@placeholder='Destination airport']")]
         private IWebElement destinationAirport;
-        [FindsBy(How = How.XPath, Using = "//*[@class='core-btn-primary core-btn-block core-btn-big'][@role='button']")]
+        [FindsBy(How = How.XPath, Using = "//button[@class='core-btn-primary core-btn-block core-btn-big']")]
         private IWebElement buttonContinue;
-        [FindsBy(How = How.XPath, Using = "//*[@class='ryanair-error-tooltip']")]
+        [FindsBy(How = How.XPath, Using = "//li[@class='ryanair-error-tooltip']")]
         private IWebElement errorTooltip;
         
         public FlightsPage(IWebDriver webDriver)
         {
             PageFactory.InitElements(webDriver, this);
         }
-
-        public FlightsPage ClearAirportFields()
-        {
-            departureAirport.Clear();
-            destinationAirport.Clear();
-            return this;
-        }
-
-        public FlightsPage SendKeysToAirportFields(string city)
-        {
-            departureAirport.SendKeys(city);
-            destinationAirport.SendKeys(city);
-            return this;
-        }
+		
+		public FlightsPage EnterCityToAirportField(string city, string airportName)
+		{
+			IWebElement airport;
+			switch (airportName)
+			{
+				case "Departure Airport":
+					airport = departureAirport;
+					break;
+				case "Destination Airport":
+					airport = destinationAirport;
+					break;
+				default:
+					airport = departureAirport;
+					break;
+			}
+			airport.Clear();
+			airport.SendKeys(city);
+			return this;
+		}
 
         public FlightsPage ClickButtonContinue()
         {

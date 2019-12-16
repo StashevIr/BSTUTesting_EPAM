@@ -21,29 +21,26 @@ namespace PageObjectLab
         public void EnterEqualDepartureAndDestinationAirport()
         {
             string city = "Warsaw Modlin";
-            string errorTextForValidAirport = "Please enter a valid airport.";
 
-            FlightsPage flightsPage = new FlightsPage(webDriver).
-                ClearAirportFields().
-                SendKeysToAirportFields(city).
-                ClickButtonContinue();
+            FlightsPage flightsPage = new FlightsPage(webDriver)
+				.EnterCityToAirportField(city, "Departure Airport")
+				.EnterCityToAirportField(city, "Destination Airport")
+				.ClickButtonContinue();
 
-            Assert.AreEqual(errorTextForValidAirport, flightsPage.ErrorTooltipFromFlightsPage());
+            Assert.AreEqual("Please enter a valid airport.", flightsPage.ErrorTooltipFromFlightsPage());
         }
 
         [Test]
         public void EnterNonexistentHotel()
         {
             string hotel = "BSTU Hostel 5";
-            string errorTextForDestination = "Please select a destination from the dropdown";
 
-            HotelPage hotelPage = new HotelPage(webDriver).
-                ClearDestinationField().
-                SendKeysToDestinationField(hotel).
-                SetDate().
-                SendEnter();
+            HotelPage hotelPage = new HotelPage(webDriver)
+				.EnterDestinationField(hotel)
+				.SetDate_DayIn_DayOut_Mounth_Year("12", "20", "05", "2020")
+				.Enter();
 
-            Assert.AreEqual(errorTextForDestination, hotelPage.EroorTooltipFromHotelPage());
+            Assert.AreEqual("Please select a destination from the dropdown", hotelPage.EroorTooltipFromHotelPage());
         }
     }
 }

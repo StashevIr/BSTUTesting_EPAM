@@ -1,16 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PageObjectLab
 {
     public class HotelPage
     {
-        [FindsBy(How = How.XPath, Using = "//*[@class='hotels'][@for='search-type-selector-hotels'][@ng-click='$ctrl.itemClicked(search)']")]
+        [FindsBy(How = How.XPath, Using = "//input[@for='search-type-selector-hotels']")]
         private IWebElement hotelLabel;
-        [FindsBy(How = How.XPath, Using = "//*[@type='text'][@tabindex='0'][@aria-labelledby='label-destination-input']")]
+        [FindsBy(How = How.XPath, Using = "//input[@aria-labelledby='label-destination-input']")]
         private IWebElement destination;
         [FindsBy(How = How.XPath, Using = "//input[@aria-label='Check-in: - YYYY']")]
         private IWebElement yearOfCheckIn;
@@ -32,47 +29,30 @@ namespace PageObjectLab
             PageFactory.InitElements(webDriver, this);
         }
 
-        public HotelPage ClickHotel()
-        {
-            hotelLabel.Click();
-            return this;
-        }
+		public HotelPage EnterDestinationField(string hotel)
+		{
+			destination.Clear();
+			destination.SendKeys(hotel);
+			return this;
+		}
 
-        public HotelPage ClearDestinationField()
-        {
-            destination.Clear();
-            return this;
-        }
-
-        public HotelPage SendKeysToDestinationField(string hotel)
-        {
-            destination.SendKeys(hotel);
-            return this;
-        }
-
-        public HotelPage SetPartOfDate(IWebElement webElement, string date)
+		public HotelPage SetPartOfDate(IWebElement webElement, string date)
         {
             webElement.Clear();
             webElement.SendKeys(date);
             return this;
         }
 
-        public HotelPage SetDate()
+        public HotelPage SetDate_DayIn_DayOut_Mounth_Year(string dayCheckIn, string dayCheckOut, string mounth, string year)
         {
-            string dayCheckIn = "12";
-            string dayCheckOut = "20";
-            string mounth = "05";
-            string year = "2020";
-
-            return this.
-                SetPartOfDate(yearOfCheckIn, year).
+            return SetPartOfDate(yearOfCheckIn, year).
                 SetPartOfDate(mounthOfCheckIn, mounth).
                 SetPartOfDate(dayOfCheckIn, dayCheckIn).
                 SetPartOfDate(yearOfCheckOut, year).
                 SetPartOfDate(mounthOfCheckOut, mounth).
                 SetPartOfDate(dayOfCheckOut, dayCheckOut);
         }
-        public HotelPage SendEnter()
+        public HotelPage Enter()
         {
             dayOfCheckOut.SendKeys(Keys.Enter);
             return this;
