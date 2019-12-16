@@ -4,34 +4,39 @@ namespace Aircompany.Planes
 {
     public class PassengerPlane : Plane
     {
-        public int PassengersCapacity { get; set; }
+		private int _passengersCapacity;
 
         public PassengerPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, int passengersCapacity)
             : base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
         {
-            PassengersCapacity = passengersCapacity;
+            _passengersCapacity = passengersCapacity;
         }
 
-        public override bool Equals(object obj)
+		public int GetPassengersCapacity()
+		{
+			return _passengersCapacity;
+		}
+
+		public override bool Equals(object obj)
         {
             var plane = obj as PassengerPlane;
             return plane != null &&
                    base.Equals(obj) &&
-                   PassengersCapacity == plane.PassengersCapacity;
+                   _passengersCapacity == plane._passengersCapacity;
         }
 
         public override int GetHashCode()
         {
             var hashCode = 751774561;
-            return (hashCode * -1521134295 + base.GetHashCode()) * -1521134295 + PassengersCapacity.GetHashCode();
+            return (hashCode * -1521134295 + base.GetHashCode()) * -1521134295 + _passengersCapacity.GetHashCode();
         }
 
         public override string ToString()
         {
             return base.ToString().Replace("}",
-                    ", passengersCapacity=" + PassengersCapacity +
+                    ", passengersCapacity=" + 
+					_passengersCapacity +
                     '}');
         }
-
     }
 }
