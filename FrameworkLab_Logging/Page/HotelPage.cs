@@ -26,7 +26,7 @@ namespace FrameworkLab
 		
 		public HotelPage(IWebDriver webDriver)
         {
-            PageFactory.InitElements(webDriver, this);
+            //PageFactory.InitElements(webDriver, this);
         }
 
 		public HotelPage EnterDestinationField(string hotel)

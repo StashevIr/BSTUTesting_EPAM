@@ -24,7 +24,7 @@ namespace FrameworkLab
 
 		public LoginPage(IWebDriver webDriver)
 		{
-			PageFactory.InitElements(webDriver, this);
+			//PageFactory.InitElements(webDriver, this);
 		}
 
 		public LoginPage OpenPage()

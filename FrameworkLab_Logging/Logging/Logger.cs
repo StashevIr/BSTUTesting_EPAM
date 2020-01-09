@@ -9,9 +9,13 @@ namespace FrameworkLab
 {
 	public static class Logger
 	{
+		public static ILog log;
+
 		public static ILog Log
 		{
-			get { return LogManager.GetLogger("LOGGER"); }
+			get { return log;
+				//return LogManager.GetLogger("LOGGER"); 
+			}
 		}
 
 		public static void InitLogger()
@@ -20,7 +24,7 @@ namespace FrameworkLab
 			var logConfigPath = AppDomain.CurrentDomain.BaseDirectory.Substring(0, separateIndex) +
 							 "ConfigFiles/log4net.config";
 			var logConfigFile = new FileInfo(logConfigPath);
-			XmlConfigurator.Configure(logConfigFile);
+			//XmlConfigurator.Configure(logConfigFile);
 		}
 	}
 }

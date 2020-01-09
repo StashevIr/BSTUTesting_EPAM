@@ -26,7 +26,7 @@ namespace FrameworkLab
 
 		public FlightsPage(IWebDriver webDriver)
         {
-            PageFactory.InitElements(webDriver, this);
+            //PageFactory.InitElements(webDriver, this);
         }
 		
 		public FlightsPage EnterCityToAirportField(string city, string airportName)
